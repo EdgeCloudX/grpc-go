@@ -1523,6 +1523,14 @@ func (s *Server) handleStream(t transport.ServerTransport, stream *transport.Str
 		trInfo.tr.LazyPrintf("%s", errDesc)
 		trInfo.tr.SetError()
 	}
+	header, _ := stream.Header()
+	logger.Errorf("grpc fail header: %v", header)
+	logger.Errorf("grpc fail: %s, remote: %s, service: %s, sm: %s", errDesc, t.RemoteAddr(), service, sm)
+	var services []string
+	for k, _ := range s.m {
+		services = append(services, k)
+	}
+	logger.Errorf("grpc all service: %s", services)
 	if err := t.WriteStatus(stream, status.New(codes.Unimplemented, errDesc)); err != nil {
 		if trInfo != nil {
 			trInfo.tr.LazyLog(&fmtStringer{"%v", []interface{}{err}}, true)
