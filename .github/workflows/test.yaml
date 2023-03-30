@@ -10,6 +10,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run a multi-line script
-        run: |
-          date
-          uname -a
+        run: docker ps
