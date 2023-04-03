@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-4:
-    runs-on: self-hosted
+    runs-on: self-hosted-1
     steps:
       - uses: actions/checkout@v2
       - name: Set up Docker Buildx
