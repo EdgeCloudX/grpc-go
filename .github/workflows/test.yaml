@@ -13,5 +13,5 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Run a multi-line script
         run: |
-          echo toJSON(${{ github }})
+          echo ${{ fromJSON(github) }}
           echo ${{ github.ref_name }}
