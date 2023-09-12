@@ -13,6 +13,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Run a multi-line script
         run: |
+          echo ${{ github }}
           echo ${{ github.ref_name }}
           docker ps
           go version
