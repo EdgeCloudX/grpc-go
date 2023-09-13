@@ -5,24 +5,16 @@ on:
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
   TAG: ${{ github.ref_name }}
-
-jobs:
-  setTAG:
-    runs-on: 
-      group: Default
-    env:
-       ORIGINAL_STRING: "The part I want to extract is: ABCDEFG"
-    
-    steps:
-     - name: 使用 Shell 脚本截取字符串
-       run: |
-         extracted_part="${TAG##*-}"  # 从最后一个冒号和空格后开始截取
-         TAG=$extracted_part
+ 
   build-4:
     runs-on: 
       group: Default
     needs: [ setTAG]
     steps:
+      - name: 使用 Shell 脚本截取字符串
+        run: |
+         extracted_part="${TAG##*-}"  # 从最后一个冒号和空格后开始截取
+         echo "TAG=$extracted_part" >> $GITHUB_ENV
       - name: Run a multi-line script
         run: |
           echo ${{ env.TAG }}
