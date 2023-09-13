@@ -5,8 +5,8 @@ on:
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
   labels: ${{ github.ref_name }}
-  label: "${labels:4:10}"
-  TAG: $labels[4]
+  label: $labels[4]
+  TAG: $label
 
 jobs:
   build-4:
