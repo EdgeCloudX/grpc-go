@@ -5,18 +5,19 @@ on:
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
   TAG: ${{ github.ref_name }}
- 
-  build-4:
-    runs-on: 
+  
+jobs:
+   build-4:
+     runs-on: 
       group: Default
-    needs: [ setTAG]
-    steps:
-      - name: 使用 Shell 脚本截取字符串
-        run: |
+     needs: [ setTAG]
+     steps:
+       - name: 使用 Shell 脚本截取字符串
+         run: |
          extracted_part="${TAG##*-}"  # 从最后一个冒号和空格后开始截取
          echo "TAG=$extracted_part" >> $GITHUB_ENV
-      - name: Run a multi-line script
-        run: |
+       - name: Run a multi-line script
+         run: |
           echo ${{ env.TAG }}
           str="Hello, World!"
           substr="${str:6:5}"  # 从索引 6 开始截取 5 个字符
