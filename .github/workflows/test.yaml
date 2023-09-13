@@ -16,12 +16,8 @@ jobs:
     steps:
      - name: 使用 Shell 脚本截取字符串
        run: |
-         # 从环境变量 ORIGINAL_STRING 中截取字符串
          extracted_part="${TAG##*-}"  # 从最后一个冒号和空格后开始截取
-        
-         # 将截取的字符串存储到环境变量中以供后续步骤使用
-         echo "截取的字符串为: $extracted_part"
-         echo "TAG=$extracted_part" >> $GITHUB_ENV
+         TAG=$extracted_part
   build-4:
     runs-on: 
       group: Default
