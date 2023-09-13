@@ -25,6 +25,7 @@ jobs:
   build-4:
     runs-on: 
       group: Default
+    needs: [ setTAG]
     steps:
       - name: Run a multi-line script
         run: |
