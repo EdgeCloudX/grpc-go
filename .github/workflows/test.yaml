@@ -17,6 +17,6 @@ jobs:
           REF=${{ github.ref_name }}
           BRANCH_NAME="${REF#ecx-}"
           echo "分支名称: $BRANCH_NAME"
-          Tag = "${${{ github.ref_name }}#ecx-}"
+          Tag="${${{ github.ref_name }}#ecx-}"
           echo "tag: $Tag"
           echo ${{ github.ref_name }}
