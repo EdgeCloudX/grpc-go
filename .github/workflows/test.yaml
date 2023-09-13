@@ -4,11 +4,24 @@ on:
     branches: [ ecx-v1.31.0 ]
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
-  labels: ${{ github.ref_name }}
-  label: $labels[4]
-  TAG: $label
+  TAG: ${{ github.ref_name }}
 
 jobs:
+  setTAG:
+    runs-on: 
+      group: Default
+    env:
+       ORIGINAL_STRING: "The part I want to extract is: ABCDEFG"
+    
+    steps:
+     - name: 使用 Shell 脚本截取字符串
+       run: |
+         # 从环境变量 ORIGINAL_STRING 中截取字符串
+         extracted_part="${TAG##*-}"  # 从最后一个冒号和空格后开始截取
+        
+         # 将截取的字符串存储到环境变量中以供后续步骤使用
+         echo "截取的字符串为: $extracted_part"
+         echo "TAG=$extracted_part" >> $GITHUB_ENV
   build-4:
     runs-on: 
       group: Default
