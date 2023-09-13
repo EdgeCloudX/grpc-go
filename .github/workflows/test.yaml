@@ -2,7 +2,11 @@ name: CI
 on:
   push:
     branches: [ ecx-v1.31.0 ]
-
+env:
+  BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
+  labels: ${{ github.ref_name }}
+  label: "${Tags:4:10}"
+  TAG: $label
 
 jobs:
   build-4:
@@ -14,10 +18,4 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Run a multi-line script
         run: |
-          REF=${{ github.ref_name }}
-          BRANCH_NAME="${REF#ecx-}"
-          echo "分支名称: $BRANCH_NAME"
-          Tags=${{ github.ref_name }}
-          Tag="${Tags:4:10}"
-          echo "tag: $Tag"
-          echo ${{ github.ref_name }}
+          echo ${{ env.TAG }}
