@@ -5,17 +5,14 @@ on:
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
   labels: ${{ github.ref_name }}
-  label: "${labels:4:10}"
-  TAG: "${${{ github.ref_name }}#ecx-}"
+  label: "${${{ github.ref_name }}#ecx-}"
+  TAG: "$label"
 
 jobs:
   build-4:
     runs-on: 
       group: Default
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
       - name: Run a multi-line script
         run: |
           echo ${{ env.TAG }}
