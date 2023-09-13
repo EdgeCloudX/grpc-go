@@ -4,9 +4,9 @@ on:
     branches: [ ecx-v1.31.0 ]
 env:
   BASEIMAGE: k8s.gcr.io/debian-base-amd64:v2.0.0
-  labels: "${${{ github.ref_name }}:4:10}"
+  labels: ${{ github.ref_name }}
   label: "${labels:4:10}"
-  TAG: $labels
+  TAG: $labels[4]
 
 jobs:
   build-4:
